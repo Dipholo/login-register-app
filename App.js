@@ -1,19 +1,36 @@
-import React, { Component } from 'react'; import {
-  StyleSheet, View, StatusBar
-  } from 'react-native';
-  import Routes from './pages/TabPages/Routes';
-  export default class App extends Component   { render() {
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
+import { Component } from 'react';
+import LogInScreen from './LogInScreen';
+import SignUpScreen from './SignUpScreen';
+import { useState } from 'react';
+import { ImageBackground } from 'react-native';
+
+
+
+
+export default function App() {
+  const [SignedUp, setSignedUp]=useState(false);
   return (
-  <View style={styles.container}>
-  <StatusBar backgroundColor="#6e052f"
-  barStyle="light-content"
-  />
-  <Routes/>
-  </View>
+    <View style={styles.container}>
+    <ImageBackground style={styles.bac} source={require('./assets/bac.webp')}>
+    {SignedUp? <LogInScreen/>:<SignUpScreen setSignedUp={setSignedUp}/>}
+    </ImageBackground>
+    </View>
   );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    
+  },
+  bac:{
+    flex: 1,
+    height: '100%',
+    width: '100%',
+   
   }
-  }
-  const styles = StyleSheet.create({ container: {
-  flex: 1,
-  }
-  });
+});
